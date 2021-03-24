@@ -108,7 +108,7 @@ typedef struct Button {
  * Levels.c
  */
 extern EnvItem level1[16];
-extern EnvItem level2[19];
+extern EnvItem level2[12];
 
 /**
  * Functions.c
