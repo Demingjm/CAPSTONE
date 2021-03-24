@@ -116,14 +116,18 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
 
     // check if player is at the world border
     if (player->hitBox.x < 0) { player->hitBox.x = 0; player->velocity.x = 0; }
-    if (player->hitBox.x > 1550) { player->hitBox.x = 1550; player->velocity.x = 0; }
+
+    float mapEdge = map[mapLength - 1].hitBox.x + map[mapLength - 1].hitBox.width;
+
+    if (player->hitBox.x + player->hitBox.width > mapEdge) { // Prevent player from exceeding the edge of the map
+       player->hitBox.x = mapEdge - player->hitBox.width; 
+       player->velocity.x = 0; 
+    }
 
     if (player->hitBox.y < 150) { player->hitBox.y = 150; player->velocity.y = 0; }
 
     //Check if player has fallen through pit/world, reset game
     if (player->hitBox.y > 1300) { ResetGame(player, map, mapLength); };
-
-
 }
 
 /**
@@ -146,17 +150,19 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
  * @return none - returns nothing
  */
 
-void UpdateCameraCenter(Camera2D *camera, Entity *player, EnvItem *envItems, int width, int height) {
+void UpdateCameraCenter(Camera2D *camera, Entity *player, EnvItem *map, int mapLength, int width, int height) {
     // reset camera position
     camera->target = (Vector2){player->hitBox.x, player->hitBox.y};
     camera->offset = (Vector2){width / 2, height / 2};
 
     float minX = 0, minY = 150, maxX = MAX_CMA_X, maxY = MAX_CMA_Y;
 
-    EnvItem temp = envItems[0]; //first element in the map will be used for setting the bounds of the camera
-    // set min and max 
-    minX = fminf(temp.hitBox.x, minX); // sets the smaller of the two to minX
-    maxX = fmaxf(temp.hitBox.x, maxX); // sets the larger of the two to maxX
+    /* Runs through the entire map and sets the min and max for the map*/
+    for (int i = 0; i < mapLength; i++) {
+        EnvItem temp = map[i];
+        minX = fminf(temp.hitBox.x, minX);
+        maxX = fmaxf(temp.hitBox.x, maxX);
+    }
 
     Vector2 max = GetWorldToScreen2D((Vector2){maxX, maxY}, *camera); // sets the maximum position for the camera
     Vector2 min = GetWorldToScreen2D((Vector2){minX, minY}, *camera); // sets the minimum position for the camera
