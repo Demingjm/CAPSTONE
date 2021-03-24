@@ -254,7 +254,6 @@ void DrawStartScreen(Texture2D *textures, int textureLength, ScrollState *state)
     }
 
     DrawTexturePro(button->texture, src, dst, origin, 0.0f, WHITE);
-    
  }
 
 /**
@@ -275,3 +274,5 @@ void DrawStartScreen(Texture2D *textures, int textureLength, ScrollState *state)
 
      DrawTexturePro(title, src, dst, origin, 0.0f, WHITE);
  }
+
+ 
