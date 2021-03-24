@@ -26,7 +26,7 @@
  */
 bool StartGame() {
 
-    
+    /* Initialize Start Menu assets */
     Texture2D title = LoadTexture("assets/menu/The-Walk-Home-test.png");
 
     Texture2D textures [] = {
@@ -58,6 +58,7 @@ bool StartGame() {
     
     int texturesLength = LENGTH(textures);
 
+    /* Start Menu Loop */
     while (!start_state) { // while the game isn't supposed to start
         start_state = ButtonHandler(&start_button);
         if (ButtonHandler(&quit_button)) {start_state = true; escaped = true;}
@@ -73,6 +74,7 @@ bool StartGame() {
         } EndDrawing();
     }
 
+    /* de-initialize resources */
     UnloadTextures(textures, texturesLength);
     UnloadTexture(start_button.texture);
     UnloadTexture(title);
