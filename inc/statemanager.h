@@ -40,11 +40,12 @@ typedef struct {
     int top;
 } StateManager;
 
-// int InitState (StateManager *statemanager);
-// int FreeState (StateManager *statemanager);
-// int PushState (StateManager *statemanager);
-// int PopState (StateManager *statemanager);
-// State *GetTopState (StateManager *statemanager);
-// int UpdateState (StateManager *statemanager);
-// int DrawState (StateManager *statemanager);
+int InitState (StateManager *statemanager);
+int FreeState (StateManager *statemanager);
+int ScaleState (StateManager *statemanager);
+State *GetTopState (StateManager *statemanager);
+int PushState (StateManager *statemanager, State *state);
+int PopState (StateManager *statemanager);
+int UpdateState (StateManager *statemanager, float deltatime);
+int DrawState (StateManager *statemanager, float deltatime);
 #endif
