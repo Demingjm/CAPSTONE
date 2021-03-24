@@ -75,9 +75,12 @@ typedef struct Entity {
     Color color;
     Sprite sprite;
     bool canJump; //used to prevent double jumps
+    bool invincible;
     float speed;  //for setting the players speed
     float jumpHeight; //for setting the players jump height
     int coins;
+    char hearts;
+    float hurtTime;
 } Entity;
 
 typedef struct EnvItem {
