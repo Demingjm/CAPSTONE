@@ -71,13 +71,21 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
     player->hitBox.x += player->velocity.x;
     player->hitBox.y += player->velocity.y;
 
-
     for (int i = 0; i < mapLength; i++) {
         if (!map[i].blocking && !map[i].used &&  //if the current item isn't blocking, hasn't been consumed, and is in collision then proceed
             CheckCollisionRecs(player->hitBox, map[i].hitBox)) {
                 switch (map[i].id) {
                     case 3:
                         // fire obstacle
+                        if (player->invincible && ((GetTime() - player->hurtTime) > 2)) // invincibility lasts for 2 seconds,
+                            player->invincible = false;                                 // during this period the player
+                                                                                        // cannot be harmed
+                        if (!player->invincible){
+                            player->hearts--;
+                            player->invincible = true;
+                            player->hurtTime = GetTime(); // store when the player was hurt
+                        }
+                        // todo check if player was hit "recently"
                         break;
                     case 5:
                         player->jumpHeight = DFLT_JMP_HT;
@@ -90,7 +98,7 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
 
                         break;
                     case 7:
-
+                        player->hearts += !(player->hearts % 3) ? 0 : 1;
                         break;
                     case 8:
                         player->coins++;
@@ -105,10 +113,9 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
                         printf("How did we end up here?\n");
                         break; //shouldn't get here
                 }
-                map[i].used = (map[i].id == 10) ? false : true; // item has been consumed
+                map[i].used = (map[i].id == 10 || map[i].id == 3) ? false : true; // if the item collided with isn't a goal or obstacle thenit has been consumed
             }
     }
-
 
 
     // now update the players x position
@@ -127,7 +134,7 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
     if (player->hitBox.y < 150) { player->hitBox.y = 150; player->velocity.y = 0; }
 
     //Check if player has fallen through pit/world, reset game
-    if (player->hitBox.y > 1300) { ResetGame(player, map, mapLength); };
+    if (player->hitBox.y > 1300 || player->hearts <= 0) { ResetGame(player, map, mapLength); };
 }
 
 /**
@@ -191,7 +198,9 @@ void CreatePlayer(Entity *player, Texture2D texture) {
     player->speed = DFLT_SPD;
     player->jumpHeight = DFLT_JMP_HT;
     player->canJump    = false;
-    player->coins = 0;
+    player->coins  = 0;
+    player->hearts = 3;
+    player->invincible = false;
 
     player->sprite.texture   = texture;
     player->sprite.maxFrame  = 6;//(int)(player->sprite.texture.width / (int)player->sprite.texture.height);
@@ -234,7 +243,9 @@ void ResetGame(Entity *player, EnvItem *envItems, int envItemsLength) {
     speedMult = 1;
     player->canJump    = false;
     player->jumpHeight = DFLT_JMP_HT;
-    player->coins = 0;
+    player->coins  = 0;
+    player->hearts = 3;
+    player->invincible = false;
 
     for (int i = 0; i < envItemsLength; i++) if (envItems[i].used) envItems[i].used = false;
 }
@@ -257,4 +268,5 @@ void Debug(Entity *player) {
     DrawText(TextFormat("FPS: %d", GetFPS()), 0, 140, 20, GREEN);
     DrawText(TextFormat("Players Jump Height: %.0f", player->jumpHeight), 0, 200, 20, WHITE);
     DrawText(TextFormat("Players speed: %.0f", player->speed), 0, 240, 20, WHITE);
+    DrawText(TextFormat("Hearts: %d / 3", player->hearts),0,300, 20, RED);
 }
