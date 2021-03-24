@@ -69,7 +69,7 @@ int PlayGame() {
 
     while(game_state)  {
 
-        if (IsKeyPressed(KEY_X)) { escaped = true; break; }
+        if (WindowShouldClose()) { escaped = true; break; }
         if (IsKeyPressed(KEY_R)) ResetGame(&player, level1, mapLength);
         
         // update delta time, player, and camera
@@ -151,7 +151,7 @@ int PlayGame2() {
 
     while(game_state)  {
 
-        if (IsKeyPressed(KEY_X)) { escaped = true; break; }
+        if (WindowShouldClose()) { escaped = true; break; }
         if (IsKeyPressed(KEY_R)) ResetGame(&player, level2, mapLength);
         
         // update delta time, player, and camera
@@ -174,7 +174,8 @@ int PlayGame2() {
                 DrawPlayer(&player, deltaTime);
 
             } EndMode2D();
-
+            //DrawHud()
+            
             //This is simply for debugging
             //Todo: replace with helper function for debug uses
             if (DEBUG) Debug(&player);
