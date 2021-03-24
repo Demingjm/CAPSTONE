@@ -60,7 +60,7 @@ int PlayGame() {
     Camera2D camera = { 0 };
     CreateCamera(&camera, &player, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    int envItemsLength      = LENGTH(envItems);
+    int mapLength           = LENGTH(level1);
     int bg_length           = LENGTH(bg_textures);
     int map_textures_length = LENGTH(map_textures);
 
@@ -70,11 +70,11 @@ int PlayGame() {
     while(game_state)  {
 
         if (IsKeyPressed(KEY_X)) { escaped = true; break; }
-        if (IsKeyPressed(KEY_R)) ResetGame(&player, envItems, envItemsLength);
+        if (IsKeyPressed(KEY_R)) ResetGame(&player, level1, mapLength);
         
         // update delta time, player, and camera
         deltaTime = GetFrameTime();
-        UpdateCameraCenter(&camera, &player, envItems, SCREEN_WIDTH, SCREEN_HEIGHT);
+        UpdateCameraCenter(&camera, &player, level1, mapLength, SCREEN_WIDTH, SCREEN_HEIGHT);
 
         // begin drawing the window
         BeginDrawing(); {
@@ -87,8 +87,8 @@ int PlayGame() {
             // used to initialize 2d mode with the camera 
             BeginMode2D(camera); {
 
-                DrawMap(map_textures, envItems, envItemsLength);
-                UpdatePlayer(&player, envItems, envItemsLength, deltaTime, &game_state);
+                DrawMap(map_textures, level1, mapLength);
+                UpdatePlayer(&player, level1, mapLength, deltaTime, &game_state);
                 DrawPlayer(&player, deltaTime);
 
             } EndMode2D();
@@ -142,9 +142,9 @@ int PlayGame2() {
     Camera2D camera = { 0 };
     CreateCamera(&camera, &player, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    int envItemsLength = sizeof(level2) / sizeof(level2[0]);
-    int bg_length = sizeof(bg_textures) / sizeof(bg_textures[0]);
-    int map_textures_length = sizeof(map_textures) / sizeof(map_textures[0]);
+    int mapLength           = LENGTH(level2);
+    int bg_length           = LENGTH(bg_textures);
+    int map_textures_length = LENGTH(map_textures);
 
     float deltaTime = 0;
     bool escaped = false;
@@ -152,11 +152,11 @@ int PlayGame2() {
     while(game_state)  {
 
         if (IsKeyPressed(KEY_X)) { escaped = true; break; }
-        if (IsKeyPressed(KEY_R)) ResetGame(&player, level2, envItemsLength);
+        if (IsKeyPressed(KEY_R)) ResetGame(&player, level2, mapLength);
         
         // update delta time, player, and camera
         deltaTime = GetFrameTime();
-        UpdateCameraCenter(&camera, &player, level2, SCREEN_WIDTH, SCREEN_HEIGHT);
+        UpdateCameraCenter(&camera, &player, level2, mapLength, SCREEN_WIDTH, SCREEN_HEIGHT);
 
         // begin drawing the window
         BeginDrawing(); {
@@ -169,8 +169,8 @@ int PlayGame2() {
             // used to initialize 2d mode with the camera 
             BeginMode2D(camera); {
 
-                DrawMap(map_textures, level2, envItemsLength);
-                UpdatePlayer(&player, level2, envItemsLength, deltaTime, &game_state);
+                DrawMap(map_textures, level2, mapLength);
+                UpdatePlayer(&player, level2, mapLength, deltaTime, &game_state);
                 DrawPlayer(&player, deltaTime);
 
             } EndMode2D();
