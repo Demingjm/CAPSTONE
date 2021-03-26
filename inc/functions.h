@@ -133,6 +133,7 @@ void DrawPlayer(Entity *player, float deltaTime);
 void DrawStartScreen(Texture2D *textures, int textureLength, ScrollState *state);
 void DrawButton(Button *button); // todo generalize and make into DrawButton
 void DrawTitle(Texture2D title, Rectangle hitBox);
+void DrawCreditScreen(Texture2D background, Texture2D assets, Texture2D programming);
 
 /**
  * Helper.c
@@ -154,6 +155,11 @@ int PlayGame2();
  * Start.c
  */
 bool StartGame();
+
+/**
+ * Credit.c
+ */
+bool Credits();
 
 /**
  * Environtment Items IDs:
