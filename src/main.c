@@ -45,8 +45,7 @@ int main() {
         if (StartGame()) break;
         if (PlayGame())  break;
         if (PlayGame2()) break;
-
-        // CreditMenu()
+        if (Credits())   break;
     }
 
     CloseWindow(); // tell opengl to close the window

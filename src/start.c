@@ -49,7 +49,7 @@ bool StartGame() {
 
     Button quit_button = {
         LoadTexture("assets/menu/quit_sheet.png"),
-        (Rectangle){SCREEN_WIDTH/2 - quit_button.texture.width*2, SCREEN_HEIGHT/2 + start_button.texture.height*5, 200,100},
+        (Rectangle){SCREEN_WIDTH/2 - quit_button.texture.width*2, SCREEN_HEIGHT/2 + quit_button.texture.height*5, 200,100},
         false
     };
 
@@ -77,6 +77,7 @@ bool StartGame() {
     /* de-initialize resources */
     UnloadTextures(textures, texturesLength);
     UnloadTexture(start_button.texture);
+    UnlodTexture(quit_button.texture);
     UnloadTexture(title);
     return escaped;
 }
