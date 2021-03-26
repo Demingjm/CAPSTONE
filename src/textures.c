@@ -275,4 +275,31 @@ void DrawStartScreen(Texture2D *textures, int textureLength, ScrollState *state)
      DrawTexturePro(title, src, dst, origin, 0.0f, WHITE);
  }
 
+ /**
+  * DrawCreditScreen
+  * ----------------
+  * 
+  * Draws the games credit screen
+  * 
+  * @param
+  * @return none - returns nothing
+  */
+ void DrawCreditScreen(Texture2D background, Texture2D assets, Texture2D programming) {
+    Rectangle src = (Rectangle) {0, 0, background.width, background.height};
+    Rectangle dst = (Rectangle) {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+    Vector2 origin;
+
+    DrawTexturePro(background, src, dst, origin, 0.0f, WHITE);
+
+    src = (Rectangle) {0,0,assets.width, assets.height};
+    dst = (Rectangle) {100,500, assets.width * 2, assets.height * 2};
+
+    DrawTexturePro(assets, src, dst, origin, 0.0f, WHITE);
+
+    src = (Rectangle) {0, 0, programming.width, programming.height};
+    dst = (Rectangle) {100, 350, programming.width * 2, programming.height * 2};
+
+    DrawTexturePro(programming, src, dst, origin, 0.0f, WHITE);
+ }
+
  
