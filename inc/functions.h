@@ -47,7 +47,7 @@ Version: alpha-1.1.6
 #define MAX_CMA_X 1600
 #define MAX_CMA_Y 5000
 
-#define DEBUG true //set to true for debug info
+#define DEBUG false //set to true for debug info
 
 //for fun
 #define YES 1
@@ -107,6 +107,12 @@ typedef struct Button {
     bool state;         // Changes when button is pressed
 } Button;
 
+typedef struct Scene {
+    Rectangle hitBox;
+    Texture2D screen;
+    float frame;
+} Scene;
+
 /**
  * Levels.c
  */
@@ -134,6 +140,8 @@ void DrawStartScreen(Texture2D *textures, int textureLength, ScrollState *state)
 void DrawButton(Button *button); // todo generalize and make into DrawButton
 void DrawTitle(Texture2D title, Rectangle hitBox);
 void DrawCreditScreen(Texture2D background, Texture2D assets, Texture2D programming);
+bool SceneFadeIn(Scene *scene);
+bool SceneFadeOut(Scene *scene);
 
 /**
  * Helper.c
