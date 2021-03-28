@@ -302,4 +302,50 @@ void DrawStartScreen(Texture2D *textures, int textureLength, ScrollState *state)
     DrawTexturePro(programming, src, dst, origin, 0.0f, WHITE);
  }
 
+/**
+ * TransitionSceneOff
+ * ------------------
+ * 
+ * Does a fade in on the screen for smoother transitions
+ */
+bool SceneFadeOut(Scene *scene) {
+
+    Rectangle src  = (Rectangle) {0,0,scene->screen.width, scene->screen.height};
+    Rectangle dst  = scene->hitBox;
+    Vector2 origin = {0};
+    Color fade = (Color) {0,0,0,scene->frame};
+
+    BeginDrawing();
+        ClearBackground(WHITE);
+        DrawTexturePro(scene->screen,src, dst, origin, 0.0f, fade);
+    EndDrawing();
+
+    scene->frame -= 8;
+
+    if (scene->frame <= 0)
+        return true;
+
+    return false;
+}
+
+bool SceneFadeIn(Scene *scene) {
+
+    Rectangle src  = (Rectangle) {0,0,scene->screen.width, scene->screen.height};
+    Rectangle dst  = scene->hitBox;
+    Vector2 origin = {0};
+    Color fade = (Color) {0,0,0,scene->frame};
+
+    BeginDrawing();
+        ClearBackground(WHITE);
+        DrawTexturePro(scene->screen,src, dst, origin, 0.0f, fade);
+    EndDrawing();
+
+    scene->frame += 8;
+
+    if (scene->frame >= 255) 
+        return true;
+
+    return false;
+}
+
  

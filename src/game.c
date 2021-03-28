@@ -60,6 +60,12 @@ int PlayGame() {
     Camera2D camera = { 0 };
     CreateCamera(&camera, &player, SCREEN_WIDTH, SCREEN_HEIGHT);
 
+    Scene scene = (Scene) {
+        (Rectangle) {0,0,SCREEN_WIDTH, SCREEN_HEIGHT},
+        LoadTexture("assets/transitions/Level2.png"),
+        255
+    };
+
     int mapLength           = LENGTH(level1);
     int bg_length           = LENGTH(bg_textures);
     int map_textures_length = LENGTH(map_textures);
@@ -99,6 +105,7 @@ int PlayGame() {
             
         } EndDrawing();
     }
+        while (!SceneFadeIn(&scene));
 
         UnloadTexture(playerSprite);
         UnloadTextures(bg_textures, bg_length);
@@ -136,6 +143,12 @@ int PlayGame2() {
 
     Texture2D playerSprite = LoadTexture("assets/player/player-sprite.png");
 
+    Scene scene = (Scene) {
+        (Rectangle) {0,0,SCREEN_WIDTH, SCREEN_HEIGHT},
+        LoadTexture("assets/transitions/Level2.png"),
+        255
+    };
+
     Entity player = { 0 };
     CreatePlayer(&player, playerSprite);
 
@@ -151,14 +164,13 @@ int PlayGame2() {
 
     while(game_state)  {
 
-        if (WindowShouldClose()) { escaped = true; break; }
-        if (IsKeyPressed(KEY_R)) ResetGame(&player, level2, mapLength);
-        
-        // update delta time, player, and camera
-        deltaTime = GetFrameTime();
-        UpdateCameraCenter(&camera, &player, level2, mapLength, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-        // begin drawing the window
+    if (WindowShouldClose()) { escaped = true; break; }
+    if (IsKeyPressed(KEY_R)) ResetGame(&player, level2, mapLength);
+    
+    // update delta time, player, and camera
+    deltaTime = GetFrameTime();
+    UpdateCameraCenter(&camera, &player, level2, mapLength, SCREEN_WIDTH, SCREEN_HEIGHT);
+    // begin drawing the window
         BeginDrawing(); {
 
             // reset the window and set background to white
@@ -183,12 +195,14 @@ int PlayGame2() {
         } EndDrawing();
     }
 
-        UnloadTexture(playerSprite);
-        UnloadTextures(bg_textures, bg_length);
-        UnloadTextures(map_textures, map_textures_length);
+    while (!SceneFadeIn(&scene));
 
-        if (escaped) 
-            return 1;
-        
-        return 0;
+    UnloadTexture(playerSprite);
+    UnloadTextures(bg_textures, bg_length);
+    UnloadTextures(map_textures, map_textures_length);
+
+    if (escaped) 
+        return 1;
+    
+    return 0;
 }
