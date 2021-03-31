@@ -71,15 +71,16 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
     player->hitBox.x += player->velocity.x;
     player->hitBox.y += player->velocity.y;
 
+    if (player->invincible && ((GetTime() - player->hurtTime) >= 2))     // invincibility lasts for 2 seconds,
+        player->invincible = false;                                      // during this period the player
+                                                                         // cannot be harmed
+
     for (int i = 0; i < mapLength; i++) {
         if (!map[i].blocking && !map[i].used &&  //if the current item isn't blocking, hasn't been consumed, and is in collision then proceed
             CheckCollisionRecs(player->hitBox, map[i].hitBox)) {
                 switch (map[i].id) {
                     case 3:
                         // fire obstacle
-                        if (player->invincible && ((GetTime() - player->hurtTime) > 2)) // invincibility lasts for 2 seconds,
-                            player->invincible = false;                                 // during this period the player
-                                                                                        // cannot be harmed
                         if (!player->invincible){
                             player->hearts--;
                             player->invincible = true;
@@ -269,4 +270,5 @@ void Debug(Entity *player) {
     DrawText(TextFormat("Players Jump Height: %.0f", player->jumpHeight), 0, 200, 20, WHITE);
     DrawText(TextFormat("Players speed: %.0f", player->speed), 0, 240, 20, WHITE);
     DrawText(TextFormat("Hearts: %d / 3", player->hearts),0,300, 20, RED);
+    DrawText(TextFormat("Invincible: %s", player->invincible ? "true" : "false"), 0,400,20,BLUE);
 }

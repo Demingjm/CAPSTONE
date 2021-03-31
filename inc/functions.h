@@ -47,7 +47,7 @@ Version: alpha-1.1.6
 #define MAX_CMA_X 1600
 #define MAX_CMA_Y 5000
 
-#define DEBUG false //set to true for debug info
+#define DEBUG true //set to true for debug info
 
 //for fun
 #define YES 1
