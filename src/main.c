@@ -43,9 +43,13 @@ int main() {
         //Todo: implement state manager stack
 
         if (StartGame()) break;
+        Transition(1);
         if (PlayGame())  break;
+        Transition(2);
         if (PlayGame2()) break;
+        FadeIn();
         if (Credits())   break;
+        FadeIn();
     }
 
     CloseWindow(); // tell opengl to close the window
