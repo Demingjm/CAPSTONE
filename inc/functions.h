@@ -172,6 +172,7 @@ bool StartGame();
  * Credit.c
  */
 bool Credits();
+bool newCreditScreen();
 
 /**
  * Environtment Items IDs:
