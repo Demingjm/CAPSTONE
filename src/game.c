@@ -53,7 +53,6 @@ int PlayGame() {
     };
 
     Texture2D hud_textures [] = {
-        LoadTexture("assets/hud/healthbar.png"),
         LoadTexture("assets/hud/heart.png"),
         LoadTexture("assets/hud/heart-empty.png"),
         LoadTexture("assets/map/coin.png"),
@@ -154,7 +153,6 @@ int PlayGame2() {
     };
 
     Texture2D hud_textures [] = {
-        LoadTexture("assets/hud/healthbar.png"),
         LoadTexture("assets/hud/heart.png"),
         LoadTexture("assets/hud/heart-empty.png"),
         LoadTexture("assets/map/coin.png"),
