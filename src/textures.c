@@ -212,8 +212,15 @@ void DrawPlayer(Entity *player, float deltaTime) {
     Rectangle src  = (Rectangle) {width, height, player->sprite.frameWidth, player->sprite.frameHeight}; // this is the dimension of the current frame
     Rectangle dst  = player->hitBox; // players hitBox
     Vector2 origin = (Vector2) {0,0}; // origin point for the sprite sheet
+
+    Color fade = WHITE;
+
+    if (player->invincible) {
+        if (player->sprite.timer >= 0.1f)
+            fade.a = 0;
+    }
     
-    DrawTexturePro(player->sprite.texture, src, dst, origin, 0.0f, WHITE); // draw the current sprite frame to the players htiBox
+    DrawTexturePro(player->sprite.texture, src, dst, origin, 0.0f, fade); // draw the current sprite frame to the players htiBox
 
 }
 
