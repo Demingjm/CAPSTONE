@@ -53,12 +53,6 @@ bool StartGame() {
         false
     };
 
-    Scene start_scene = {
-        (Rectangle) {0,0,SCREEN_WIDTH, SCREEN_HEIGHT},
-        LoadTexture("assets/transitions/Start.png"),
-        0
-    };
-
     bool start_state = false;
     bool escaped = false;
     
@@ -80,11 +74,8 @@ bool StartGame() {
         } EndDrawing();
     }
 
-    while (!SceneFadeIn(&start_scene));
-
     /* de-initialize resources */
     UnloadTextures(textures, texturesLength);
-    UnloadTexture(start_scene.screen);
     UnloadTexture(start_button.texture);
     UnloadTexture(quit_button.texture);
     UnloadTexture(title);

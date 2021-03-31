@@ -68,12 +68,6 @@ int PlayGame() {
     Camera2D camera = { 0 };
     CreateCamera(&camera, &player, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-    Scene scene = (Scene) {
-        (Rectangle) {0,0,SCREEN_WIDTH, SCREEN_HEIGHT},
-        LoadTexture("assets/transitions/Level2.png"),
-        255
-    };
-
     int mapLength           = LENGTH(level1);
     int bg_length           = LENGTH(bg_textures);
     int map_textures_length = LENGTH(map_textures);
@@ -115,7 +109,6 @@ int PlayGame() {
             
         } EndDrawing();
     }
-        while (!SceneFadeIn(&scene));
 
         UnloadTexture(playerSprite);
         UnloadTextures(bg_textures, bg_length);
@@ -161,12 +154,6 @@ int PlayGame2() {
     };
 
     Texture2D playerSprite = LoadTexture("assets/player/player-sprite.png");
-
-    Scene scene = (Scene) {
-        (Rectangle) {0,0,SCREEN_WIDTH, SCREEN_HEIGHT},
-        LoadTexture("assets/transitions/Level2.png"),
-        255
-    };
 
     Entity player = { 0 };
     CreatePlayer(&player, playerSprite);
@@ -216,7 +203,6 @@ int PlayGame2() {
         } EndDrawing();
     }
 
-    while (!SceneFadeIn(&scene));
 
     UnloadTexture(playerSprite);
     UnloadTextures(bg_textures, bg_length);
