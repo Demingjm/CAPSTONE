@@ -175,3 +175,22 @@ bool ButtonHandler(Button *button) {
     }
     return state;
 }
+
+/**
+ * Transition
+ * ----------
+ * 
+ * Makes calls to FadeIn, Level, and FadeOut
+ * to handle transitions and reduced pushes to the
+ * game stack
+ *
+ * @param level_num - number of the current level that is passed to Level()
+ * @return false    - always returns false;
+ */
+ bool Transition(char level_num) {
+    FadeIn();
+    LevelStart(level_num);
+    FadeOut();
+
+    return false;
+}
