@@ -359,47 +359,85 @@ void DrawStartScreen(Texture2D *textures, int textureLength, ScrollState *state)
  }
 
 /**
- * TransitionSceneOff
- * ------------------
- * 
- * Does a fade in on the screen for smoother transitions
+ * FadeOut
+ * -------
+ *
+ * Used for transitioning between scenes.
+ * This function uses a simple count to change the amplitude
+ * of a transparent color and draws that color on a rectangle
+ * giving the effect of a fade out
+ *
+ * @param none
+ * @return false - always returns false
  */
-bool SceneFadeOut(Scene *scene) {
+bool FadeOut() {
 
-    Rectangle src  = (Rectangle) {0,0,scene->screen.width, scene->screen.height};
-    Rectangle dst  = scene->hitBox;
-    Vector2 origin = {0};
-    Color fade = (Color) {0,0,0,scene->frame};
+    Rectangle dst = (Rectangle) {0,0,SCREEN_WIDTH, SCREEN_HEIGHT};
+    short amplitude = 255;
 
-    BeginDrawing();
-        ClearBackground(WHITE);
-        DrawTexturePro(scene->screen,src, dst, origin, 0.0f, fade);
-    EndDrawing();
 
-    scene->frame -= 8;
+    while (amplitude >= 0) {
+        Color fade = (Color) {0,0,0,amplitude};
+        BeginDrawing();
+            ClearBackground(WHITE);
+            DrawRectangleRec(dst, fade);
+        EndDrawing();
 
-    if (scene->frame <= 0)
-        return true;
+        amplitude -= 8;
+    }
 
     return false;
 }
 
-bool SceneFadeIn(Scene *scene) {
+/**
+ * FadeIn
+ * -------
+ *
+ * Used for transitioning between scenes.
+ * This function uses a simple count to change the amplitude
+ * of a transparent color and draws that color on a rectangle
+ * giving the effect of a fade in
+ *
+ * @param none
+ * @return false - always returns false
+ */
+bool FadeIn() {
+    
+    Rectangle dst = (Rectangle) {0,0,SCREEN_WIDTH, SCREEN_HEIGHT};
+    short amplitude = 0;
 
-    Rectangle src  = (Rectangle) {0,0,scene->screen.width, scene->screen.height};
-    Rectangle dst  = scene->hitBox;
-    Vector2 origin = {0};
-    Color fade = (Color) {0,0,0,scene->frame};
+    while (amplitude <= 255) {
+        Color fade = (Color) {0,0,0,amplitude};
+        BeginDrawing();
+            ClearBackground(WHITE);
+            DrawRectangleRec(dst, fade);
+        EndDrawing();
 
-    BeginDrawing();
-        ClearBackground(WHITE);
-        DrawTexturePro(scene->screen,src, dst, origin, 0.0f, fade);
-    EndDrawing();
+        amplitude += 12;
+    }
 
-    scene->frame += 8;
+    return false;
+}
 
-    if (scene->frame >= 255) 
-        return true;
+/**
+ * LevelStart
+ * ----------
+ * 
+ * Used for listing level data during transitions
+ *
+ * @param  level_num - current level to be displayed
+ * @return false     - always returns false
+ */
+bool LevelStart(char level_num) {
+    int start_time = GetTime();
+    if (level_num < 0) level_num = 0;
+
+    while ((GetTime() - start_time) < 3) {
+        BeginDrawing();
+            ClearBackground(BLACK);
+            DrawText(TextFormat("Level %d", level_num), SCREEN_WIDTH/4, SCREEN_HEIGHT/2, 50.0f, WHITE);
+        EndDrawing();
+    }
 
     return false;
 }
