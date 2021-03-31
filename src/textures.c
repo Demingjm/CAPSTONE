@@ -148,11 +148,21 @@ void DrawMap(Texture2D *textures, EnvItem *map, int mapLength) {
      *  6 - heart
      */
 
+    Rectangle src;
+    Rectangle dst;
+    Vector2 origin;
+
     DrawTextureEx(textures[1], (Vector2){1350,SCREEN_HEIGHT-textures[1].height*5}, 0.0f,5.0f,WHITE);
     for (int i = 0; i < mapLength; i ++) {
         switch (map[i].id) {
             case 0:
-                DrawTextureEx(textures[0], (Vector2){map[i].hitBox.x, map[i].hitBox.y}, 0.0f, 1.0f, WHITE);
+                DrawTextureEx(textures[0], (Vector2){map[i].hitBox.x, map[i].hitBox.y}, 0.0f, 1.5f, WHITE);
+                break;
+            case 3:
+                src = (Rectangle) {0,0,textures[7].width, textures[7].height};
+                dst = (Rectangle) {map[i].hitBox.x, map[i].hitBox.y, map[i].hitBox.width, map[i].hitBox.height};
+                origin = (Vector2) {0,0};
+                DrawTexturePro(textures[7], src, dst, origin, 0.0f, WHITE);
                 break;
             case 5:
                 if (!map[i].used) DrawTextureEx(textures[5], (Vector2){map[i].hitBox.x, map[i].hitBox.y}, 0.0f, 2.0f, WHITE);
@@ -167,7 +177,7 @@ void DrawMap(Texture2D *textures, EnvItem *map, int mapLength) {
                 if (!map[i].used) DrawTextureEx(textures[3], (Vector2){map[i].hitBox.x, map[i].hitBox.y}, 0.0f, 1.5f, WHITE);
                 break;
             default:
-                if ((map[i].id != 10) && !map[i].used) DrawRectangleRec(map[i].hitBox, map[i].color);
+                if (((map[i].id != 10) && !map[i].used) || DEBUG) DrawRectangleRec(map[i].hitBox, map[i].color);
                 break;
         }
     }
@@ -358,6 +368,8 @@ void DrawStartScreen(Texture2D *textures, int textureLength, ScrollState *state)
     DrawTexturePro(programming, src, dst, origin, 0.0f, WHITE);
  }
 
+
+
 /**
  * FadeOut
  * -------
@@ -432,7 +444,7 @@ bool LevelStart(char level_num) {
     int start_time = GetTime();
     if (level_num < 0) level_num = 0;
 
-    while ((GetTime() - start_time) < 3) {
+    while ((GetTime() - start_time) < 2) {
         BeginDrawing();
             ClearBackground(BLACK);
             DrawText(TextFormat("Level %d", level_num), SCREEN_WIDTH/4, SCREEN_HEIGHT/2, 50.0f, WHITE);
