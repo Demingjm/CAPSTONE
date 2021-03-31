@@ -52,6 +52,15 @@ int PlayGame() {
         LoadTexture("assets/hud/heart.png")
     };
 
+    Texture2D hud_textures [] = {
+        LoadTexture("assets/hud/healthbar.png"),
+        LoadTexture("assets/hud/heart.png"),
+        LoadTexture("assets/hud/heart-empty.png"),
+        LoadTexture("assets/map/coin.png"),
+        LoadTexture("assets/map/jump-boost.png"),
+        LoadTexture("assets/map/speed-boost.png")
+    };
+
     Texture2D playerSprite = LoadTexture("assets/player/player-sprite.png");
 
     Entity player = { 0 };
@@ -69,6 +78,7 @@ int PlayGame() {
     int mapLength           = LENGTH(level1);
     int bg_length           = LENGTH(bg_textures);
     int map_textures_length = LENGTH(map_textures);
+    int hud_length          = LENGTH(hud_textures);
 
     float deltaTime = 0;
     bool escaped    = false;
@@ -89,6 +99,7 @@ int PlayGame() {
             ClearBackground(WHITE);
 
             DrawBackground(bg_textures, player, camera); // draw this outside of the camera to prevent issues with how the image is drawn
+            DrawHud(hud_textures, player, camera);
 
             // used to initialize 2d mode with the camera 
             BeginMode2D(camera); {
@@ -110,6 +121,7 @@ int PlayGame() {
         UnloadTexture(playerSprite);
         UnloadTextures(bg_textures, bg_length);
         UnloadTextures(map_textures, map_textures_length);
+        UnloadTextures(hud_textures, hud_length);
 
         if (escaped) 
             return 1;
@@ -141,6 +153,15 @@ int PlayGame2() {
         
     };
 
+    Texture2D hud_textures [] = {
+        LoadTexture("assets/hud/healthbar.png"),
+        LoadTexture("assets/hud/heart.png"),
+        LoadTexture("assets/hud/heart-empty.png"),
+        LoadTexture("assets/map/coin.png"),
+        LoadTexture("assets/map/jump-boost.png"),
+        LoadTexture("assets/map/speed-boost.png")
+    };
+
     Texture2D playerSprite = LoadTexture("assets/player/player-sprite.png");
 
     Scene scene = (Scene) {
@@ -158,6 +179,7 @@ int PlayGame2() {
     int mapLength           = LENGTH(level2);
     int bg_length           = LENGTH(bg_textures);
     int map_textures_length = LENGTH(map_textures);
+    int hud_length          = LENGTH(hud_textures);
 
     float deltaTime = 0;
     bool escaped = false;
@@ -177,6 +199,7 @@ int PlayGame2() {
             ClearBackground(WHITE);
 
             DrawBackground(bg_textures, player, camera); // draw this outside of the camera to prevent issues with how the image is drawn
+            DrawHud(hud_textures, player, camera);
 
             // used to initialize 2d mode with the camera 
             BeginMode2D(camera); {
@@ -200,6 +223,7 @@ int PlayGame2() {
     UnloadTexture(playerSprite);
     UnloadTextures(bg_textures, bg_length);
     UnloadTextures(map_textures, map_textures_length);
+    UnloadTextures(hud_textures, hud_length);
 
     if (escaped) 
         return 1;

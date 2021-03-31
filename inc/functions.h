@@ -79,7 +79,7 @@ typedef struct Entity {
     float speed;  //for setting the players speed
     float jumpHeight; //for setting the players jump height
     int coins;
-    char hearts;
+    int hearts;
     float hurtTime;
 } Entity;
 
@@ -134,6 +134,7 @@ void Debug(Entity *player);
  */
 void UnloadTextures(Texture2D *textures, int length);
 void DrawBackground(Texture2D *bg_textures, Entity player, Camera2D camera);
+void DrawHud(Texture2D *hud_textures, Entity player, Camera2D camera);
 void DrawMap(Texture2D *textures, EnvItem *envItems, int envItemsLength);
 void DrawPlayer(Entity *player, float deltaTime);
 void DrawStartScreen(Texture2D *textures, int textureLength, ScrollState *state);

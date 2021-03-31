@@ -75,6 +75,56 @@ void DrawBackground(Texture2D *textures, Entity player, Camera2D camera) {
 }
 
 /**
+ * DrawHud
+ * --------------
+ * 
+ * Draws the images and handles the
+ * number of hearts to display. Image 
+ * should be static.
+ * 
+ * @param bg_textures - array of 2d textures used in the background
+ * @param player - used to show how many hearts to display
+ * @param camera - used to provide a stationary position
+ * 
+ * @return none - returns nothing
+ */
+void DrawHud(Texture2D *textures, Entity player, Camera2D camera) {
+    //Draw the players' health
+    DrawTextureEx(textures[0], (Vector2){1200, 0}, 0.0f, 6.0f, WHITE);
+
+    switch (player.hearts) {
+        case 1:
+            DrawTextureEx(textures[1], (Vector2){1250, 60}, 0.0f, 6.0f, WHITE);
+            DrawTextureEx(textures[2], (Vector2){1350, 60}, 0.0f, 6.0f, WHITE);
+            DrawTextureEx(textures[2], (Vector2){1450, 60}, 0.0f, 6.0f, WHITE);
+            break;
+        case 2:
+            DrawTextureEx(textures[1], (Vector2){1250, 60}, 0.0f, 6.0f, WHITE);
+            DrawTextureEx(textures[1], (Vector2){1350, 60}, 0.0f, 6.0f, WHITE);
+            DrawTextureEx(textures[2], (Vector2){1450, 60}, 0.0f, 6.0f, WHITE);
+            break;
+        default:
+            DrawTextureEx(textures[1], (Vector2){1250, 60}, 0.0f, 6.0f, WHITE);
+            DrawTextureEx(textures[1], (Vector2){1350, 60}, 0.0f, 6.0f, WHITE);
+            DrawTextureEx(textures[1], (Vector2){1450, 60}, 0.0f, 6.0f, WHITE);
+            break;
+
+    }
+    // Draws coin counter
+    DrawTextureEx(textures[3], (Vector2) {1450, 200}, 0.0f, 3.0f, WHITE);
+    DrawText(TextFormat("X %d", player.coins), 1525, 220, 20, WHITE);
+
+
+    //Draws player power-ups, if applicable
+    if (player.jumpHeight > DFLT_JMP_HT) {
+        DrawTextureEx(textures[4], (Vector2) {1450, 300}, 0.0f, 3.0f, WHITE);
+    }
+    else if (player.speed >= DFLT_SPD * 2 && player.speed != DFLT_SPRNT_SPD) {
+        DrawTextureEx(textures[5], (Vector2) {1500, 300}, 0.0f, 3.0f, WHITE);
+    }
+}
+
+/**
  * DrawMap
  * -------
  * 
