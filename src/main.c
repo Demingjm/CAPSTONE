@@ -33,6 +33,8 @@
 int main() {
 
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "The Walk Home");
+    Image icon = LoadImage("assets/icon/icon.png");
+    SetWindowIcon(icon);
 
     SetTargetFPS(60);
 
@@ -41,6 +43,7 @@ int main() {
     // isn't set to close.
     while(!WindowShouldClose()) {
         //Todo: implement state manager stack
+
 
         if (StartGame()) break;
         Transition(1);
