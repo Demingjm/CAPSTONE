@@ -49,7 +49,8 @@ int PlayGame() {
         LoadTexture("assets/map/coin.png"),
         LoadTexture("assets/map/jump-boost.png"),
         LoadTexture("assets/map/speed-boost.png"),
-        LoadTexture("assets/hud/heart.png")
+        LoadTexture("assets/hud/heart.png"),
+        LoadTexture("assets/map/fire.png")
     };
 
     Texture2D hud_textures [] = {
@@ -141,8 +142,9 @@ int PlayGame2() {
         LoadTexture("assets/map/coin.png"),
         LoadTexture("assets/map/jump-boost.png"),
         LoadTexture("assets/map/speed-boost.png"),
-        LoadTexture("assets/hud/heart.png")
-        
+        LoadTexture("assets/hud/heart.png"),
+        LoadTexture("assets/map/fire.png")
+
     };
 
     Texture2D hud_textures [] = {

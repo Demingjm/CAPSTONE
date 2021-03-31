@@ -48,7 +48,7 @@ int main() {
         Transition(2);
         if (PlayGame2()) break;
         FadeIn();
-        if (Credits())   break;
+        if (newCreditScreen())   break;
         FadeIn();
     }
 
