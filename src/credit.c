@@ -83,6 +83,10 @@ bool newCreditScreen() {
     float scroll    = 1.0f;
     short amplitude = 0;
 
+    double elapsedTime = GetElapsedTime(playTime);
+
+    const char *timeComplete  = ConvertTime(elapsedTime);
+
     while (!quit) {
         if (ButtonHandler(&quit_button) || WindowShouldClose()) { escaped = true; break; }
 
@@ -115,6 +119,7 @@ bool newCreditScreen() {
                     amplitude = (amplitude + 16) > 255 ? 255 : amplitude + 16;  
                 } else {
                     DrawButton(&quit_button);
+                    DrawStats(timeComplete);
                 }
             }
         EndDrawing();
