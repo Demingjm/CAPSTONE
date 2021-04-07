@@ -22,6 +22,7 @@ Version: alpha-1.1.6
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 900
@@ -56,8 +57,10 @@ Version: alpha-1.1.6
 //#define LENGTH(arr) ((sizeof(arr)/sizeof(0[arr])) / ((size_t)(!(sizeof(arr) % sizeof(0[arr]))))) <- cool macro for getting length of array
 #define LENGTH(arr) (sizeof(arr) / sizeof(*arr))
 
-
-
+extern double playTime;
+extern short  totalCoins;
+extern short  heartsLost;
+extern short  resets;
 
 typedef struct Sprite {
     Texture2D texture;
@@ -146,6 +149,7 @@ bool FadeIn();
 bool FadeOut();
 bool LevelStart(char level_num);
 void DrawHouse(Texture2D texture, EnvItem goal);
+void DrawStats(const char* timeComplete);
 
 
 /**
@@ -158,6 +162,8 @@ Vector2 GetRectCenter(Rectangle rec);
 Vector2 Vector2Abs(Vector2 v);
 bool ButtonHandler(Button *button);
 bool Transition(char level_num);
+const char* ConvertTime(double time);
+double GetElapsedTime(double time);
 
 /**
  * Game.c
