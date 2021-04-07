@@ -160,8 +160,7 @@ bool Transition(char level_num);
 /**
  * Game.c
  */
-int PlayGame();
-int PlayGame2();
+int PlayGame(EnvItem * map, int mapLength);
 
 /**
  * Start.c

@@ -45,11 +45,12 @@ int main() {
         //Todo: implement state manager stack
 
 
+
         if (StartGame()) break;
         Transition(1);
-        if (PlayGame())  break;
+        if (PlayGame(level1, LENGTH(level1)))  break;
         Transition(2);
-        if (PlayGame2()) break;
+        if (PlayGame(level2, LENGTH(level2))) break;
         FadeIn();
         if (newCreditScreen())   break;
         FadeIn();
