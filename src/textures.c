@@ -483,9 +483,9 @@ bool LevelStart(char level_num) {
  */
 void DrawStats(const char* timeComplete) {
     DrawText(TextFormat("Time taken: %s", timeComplete), 100, 300, 30, YELLOW);
-    DrawText(TextFormat("Coins collected: %d", totalCoins), 100, 330, 30, YELLOW);
-    DrawText(TextFormat("Hearts lost: %d", heartsLost), 100, 360, 30, YELLOW);
-    DrawText(TextFormat("Number of Resets: %d", resets), 100, 390, 30, YELLOW);
+    DrawText(TextFormat("Coins collected: %d", totalCoins), 100, 360, 30, YELLOW);
+    DrawText(TextFormat("Hearts lost: %d", heartsLost), 100, 420, 30, YELLOW);
+    DrawText(TextFormat("Number of Resets: %d", resets), 100, 480, 30, YELLOW);
 }
 
  
