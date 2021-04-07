@@ -152,7 +152,7 @@ void DrawMap(Texture2D *textures, EnvItem *map, int mapLength) {
     Rectangle dst;
     Vector2 origin;
 
-    DrawTextureEx(textures[1], (Vector2){1350,SCREEN_HEIGHT-textures[1].height*5}, 0.0f,5.0f,WHITE);
+    //DrawTextureEx(textures[1], (Vector2){1350,SCREEN_HEIGHT-textures[1].height*5}, 0.0f,5.0f,WHITE);
     for (int i = 0; i < mapLength; i ++) {
         switch (map[i].id) {
             case 0:
@@ -176,12 +176,29 @@ void DrawMap(Texture2D *textures, EnvItem *map, int mapLength) {
             case 8:
                 if (!map[i].used) DrawTextureEx(textures[3], (Vector2){map[i].hitBox.x, map[i].hitBox.y}, 0.0f, 1.5f, WHITE);
                 break;
+            case 10:
+                DrawHouse(textures[1], map[i]);
+
             default:
                 if (((map[i].id != 10) && !map[i].used) || DEBUG) DrawRectangleRec(map[i].hitBox, map[i].color);
                 break;
         }
     }
     DrawTextureEx(textures[2], (Vector2){map[1].hitBox.x+map[0].hitBox.width, map[0].hitBox.y-textures[2].height*3}, 0.0f, 3.0f, WHITE); // standing grass
+}
+
+/**
+ * DrawHouse
+ * ---------
+ */
+void DrawHouse(Texture2D texture, EnvItem goal) {
+    Vector2 origin = (Vector2) {0,0};
+
+    origin.x = (goal.hitBox.x + goal.hitBox.width) - texture.width * 3.5;
+    origin.y = (goal.hitBox.y + goal.hitBox.height) - texture.height * 5;
+
+    DrawTextureEx(texture, origin, 0.0f,5.0f,WHITE);
+
 }
 
 /**

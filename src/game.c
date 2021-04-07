@@ -79,11 +79,11 @@ int PlayGame(EnvItem *map, int mapLength) {
     while(game_state)  {
 
         if (WindowShouldClose()) { escaped = true; break; }
-        if (IsKeyPressed(KEY_R)) ResetGame(&player, level1, mapLength);
+        if (IsKeyPressed(KEY_R)) ResetGame(&player, map, mapLength);
         
         // update delta time, player, and camera
         deltaTime = GetFrameTime();
-        UpdateCameraCenter(&camera, &player, level1, mapLength, SCREEN_WIDTH, SCREEN_HEIGHT);
+        UpdateCameraCenter(&camera, &player, map, mapLength, SCREEN_WIDTH, SCREEN_HEIGHT);
 
         // begin drawing the window
         BeginDrawing(); {
