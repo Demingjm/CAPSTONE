@@ -30,6 +30,12 @@
  * @return none - returns nothing
  */
 
+    double playTime   = 0;
+    short  totalCoins = 0;
+    short  heartsLost = 0;
+    short  resets     = 0;
+
+
 int main() {
 
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "The Walk Home");
@@ -48,6 +54,7 @@ int main() {
 
         if (StartGame()) break;
         Transition(1);
+        playTime = GetTime();
         if (PlayGame(level1, LENGTH(level1)))  break;
         Transition(2);
         if (PlayGame(level2, LENGTH(level2))) break;
