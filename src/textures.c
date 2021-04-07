@@ -471,4 +471,21 @@ bool LevelStart(char level_num) {
     return false;
 }
 
+/**
+ * DrawStats
+ * ---------
+ * 
+ * Used in the credits to draw
+ * the players stats throughout their game
+ *
+ * @param timeComplete - a string holding the formatted time taken to complete the game
+ * @return none
+ */
+void DrawStats(const char* timeComplete) {
+    DrawText(TextFormat("Time taken: %s", timeComplete), 100, 300, 30, YELLOW);
+    DrawText(TextFormat("Coins collected: %d", totalCoins), 100, 330, 30, YELLOW);
+    DrawText(TextFormat("Hearts lost: %d", heartsLost), 100, 360, 30, YELLOW);
+    DrawText(TextFormat("Number of Resets: %d", resets), 100, 390, 30, YELLOW);
+}
+
  
