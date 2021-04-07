@@ -194,3 +194,50 @@ bool ButtonHandler(Button *button) {
 
     return false;
 }
+
+/**
+ * ConvertTime
+ * -----------
+ *
+ *
+ * Converts time in seconds to an easier to read format
+ *
+ * @param time - time in seconds
+ * @return string - returns a formatted string representing time
+ */
+const char* ConvertTime(double time) {
+
+    int t = (int) time;
+
+    int hour   = 0,
+        minute = 0,
+        second = 0;
+
+    hour = t / 3600;
+    t   %= 3600;
+
+    minute = t / 60;
+    t     %= 60;
+
+    second = t; 
+
+    static char result [16];
+    
+    snprintf(result, sizeof(result), "%d:%d:%d", hour, minute, second);
+
+    return result;
+}
+
+/**
+ * GetElapsedTime
+ * --------------
+ *
+ * Returns the amount of time that has elapsed
+ * between the input and time of the running game
+ * 
+ * @param time - time counted
+ * @return double - return the time between input and current time
+ */
+double GetElapsedTime(double time) {
+    return GetTime() - time;
+}
