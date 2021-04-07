@@ -118,6 +118,7 @@ typedef struct Scene {
  */
 extern EnvItem level1[16];
 extern EnvItem level2[12];
+extern EnvItem level3[19];
 
 /**
  * Functions.c
