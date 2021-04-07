@@ -85,6 +85,7 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
                             player->hearts--;
                             player->invincible = true;
                             player->hurtTime = GetTime(); // store when the player was hurt
+                            heartsLost++;
                         }
                         // todo check if player was hit "recently"
                         break;
@@ -103,7 +104,7 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
                         break;
                     case 8:
                         player->coins++;
-                        // coins collected
+                        totalCoins++;
                         break;
                     case 10:
                         ResetGame(player, map, mapLength);
@@ -248,6 +249,7 @@ void ResetGame(Entity *player, EnvItem *envItems, int envItemsLength) {
     player->hearts = 3;
     player->invincible = false;
 
+    resets++;
     for (int i = 0; i < envItemsLength; i++) if (envItems[i].used) envItems[i].used = false;
 }
 
