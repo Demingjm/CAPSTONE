@@ -152,6 +152,11 @@ void DrawMap(Texture2D *textures, EnvItem *map, int mapLength) {
     Rectangle dst;
     Vector2 origin;
 
+    // Draw the closest trees
+    DrawTextureEx(textures[8], (Vector2){0, -50}, 0.0f, 6.0f, WHITE);
+    DrawTextureEx(textures[8], (Vector2){textures[8].width * 2, -50}, 0.0f, 6.0f, WHITE);
+    DrawTextureEx(textures[8], (Vector2){textures[8].width * 4, -50}, 0.0f, 6.0f, WHITE);
+
     //DrawTextureEx(textures[1], (Vector2){1350,SCREEN_HEIGHT-textures[1].height*5}, 0.0f,5.0f,WHITE);
     for (int i = 0; i < mapLength; i ++) {
         switch (map[i].id) {
@@ -185,6 +190,7 @@ void DrawMap(Texture2D *textures, EnvItem *map, int mapLength) {
         }
     }
     DrawTextureEx(textures[2], (Vector2){map[1].hitBox.x+map[0].hitBox.width, map[0].hitBox.y-textures[2].height*3}, 0.0f, 3.0f, WHITE); // standing grass
+
 }
 
 /**
@@ -308,10 +314,6 @@ void DrawStartScreen(Texture2D *textures, int textureLength, ScrollState *state)
     DrawTextureEx(textures[3], (Vector2){state->f_t_scroll, 100}, 0.0f, 5.0f, WHITE);
     DrawTextureEx(textures[3], (Vector2){textures[3].width * 2 + state->f_t_scroll, 100}, 0.0f, 5.0f, WHITE);
 
-    // Draw the closest trees
-    DrawTextureEx(textures[4], (Vector2){state->c_t_scroll, -50}, 0.0f, 6.0f, WHITE);
-    DrawTextureEx(textures[4], (Vector2){textures[4].width * 2 + state->c_t_scroll, -50}, 0.0f, 6.0f, WHITE);
-    DrawTextureEx(textures[4], (Vector2){textures[4].width * 4 + state->c_t_scroll, -50}, 0.0f, 6.0f, WHITE);
 }
 
 /**
