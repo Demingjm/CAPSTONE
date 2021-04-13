@@ -38,7 +38,7 @@ int PlayGame(EnvItem *map, int mapLength) {
         LoadTexture("assets/background/parallax-mountain-bg.png"),
         LoadTexture("assets/background/parallax-mountain-montain-far.png"),
         LoadTexture("assets/background/parallax-mountain-mountains.png"),
-        LoadTexture("assets/background/parallax-mountain-trees.png"),
+        LoadTexture("assets/background/parallax-mountain-trees.png")
 
     };
 
@@ -51,7 +51,9 @@ int PlayGame(EnvItem *map, int mapLength) {
         LoadTexture("assets/map/speed-boost.png"),
         LoadTexture("assets/hud/heart.png"),
         LoadTexture("assets/map/fire.png"),
-        LoadTexture("assets/background/parallax-mountain-foreground-trees.png")
+        LoadTexture("assets/background/parallax-mountain-foreground-trees.png"),
+        LoadTexture("assets/map/log.png"),
+        LoadTexture("assets/map/boulder.png")
     };
 
     Texture2D hud_textures [] = {
