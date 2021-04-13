@@ -43,12 +43,15 @@ Version: alpha-1.1.6
 // envItems constants
 #define ITEM_SZ 25.0f
 #define PLTFRM_SZ 150.f
+#define BLDR_SZ 200.0f
+#define LOG_SZ_X 75
+#define LOG_SZ_Y 100
 
 //camera constants
 #define MAX_CMA_X 1600
 #define MAX_CMA_Y 5000
 
-#define DEBUG true //set to true for debug info
+#define DEBUG false //set to true for debug info
 
 //for fun
 #define YES 1
@@ -196,6 +199,8 @@ bool newCreditScreen();
  *  8 - coin
  *  9 - reserved
  * 10 - goal post
+ * 11 - log
+ * 12 - boulder
  */
 
 
