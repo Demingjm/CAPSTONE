@@ -183,6 +183,21 @@ void DrawMap(Texture2D *textures, EnvItem *map, int mapLength) {
                 break;
             case 10:
                 DrawHouse(textures[1], map[i]);
+                break;
+            case 11:
+                src = (Rectangle) {0,0,textures[9].width, textures[9].height};
+                dst = (Rectangle) {map[i].hitBox.x, map[i].hitBox.y, map[i].hitBox.width, map[i].hitBox.height};
+                origin = (Vector2) {0,0};
+
+                DrawTexturePro(textures[9], src, dst, origin, 0.0f, WHITE);
+                break;
+            case 12:
+                src = (Rectangle) {0,0,textures[10].width, textures[10].height};
+                dst = (Rectangle) {map[i].hitBox.x, map[i].hitBox.y, map[i].hitBox.width, map[i].hitBox.height};
+                origin = (Vector2) {0,0};
+
+                DrawTexturePro(textures[10], src, dst, origin, 0.0f, WHITE);
+                break;
 
             default:
                 if (((map[i].id != 10) && !map[i].used) || DEBUG) DrawRectangleRec(map[i].hitBox, map[i].color);
