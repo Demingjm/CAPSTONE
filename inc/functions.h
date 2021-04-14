@@ -119,6 +119,13 @@ typedef struct Scene {
     float frame;
 } Scene;
 
+typedef struct EnvObject {
+    int type;
+    int startPoint;
+    int height;
+    int size;
+} EnvObject;
+
 /**
  * Levels.c
  */
@@ -183,6 +190,11 @@ bool StartGame();
  */
 bool Credits();
 bool newCreditScreen();
+
+/**
+ * Parser.c
+ */
+EnvItem* CreateLevel(char * filename);
 
 /**
  * Environtment Items IDs:

@@ -60,6 +60,9 @@ int main() {
         if (PlayGame(level2, LENGTH(level2))) break;
         Transition(3);
         if (PlayGame(level3, LENGTH(level3))) break;
+
+
+        
         FadeIn();
         if (newCreditScreen())   break;
         FadeIn();

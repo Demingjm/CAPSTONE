@@ -1,0 +1,55 @@
+This file will serve as a step-by-step tutorial for level creation.
+It is aimed to make the level creation process as quick and painless as possible.
+If you have any questions about the contents of this document, please contact Hunter Craig.
+
+-----------Level Creation-----------
+Ever wanted to create your own level for the game, but don't know how to program? Here's a basic tutorial!
+
+The function in parser.c, conveniently labeled CreateLevel, takes a file name and converts the contents of that file
+into a playable level. In order to do this, the contents of the file must conform to the format listed below:
+
+0 0 1200 150
+
+The first number is the numerical ID of the object you are attempting to create. Here is a helpful list
+of the internal IDs of every object in the game.
+
+0 - basic platform 
+1 - raised platform
+2 - ice platform (not available - will autocorrect to basic platform)
+3 - fire
+4 - spikes/barbedwire (not available - will autocorrect to fire)
+5 - speed boost
+6 - jump boost
+7 - heart
+8 - coin
+9 - reserved (will throw an error if you call this)
+10 - goal post (you need one of these to make your level completable. Keep this in mind when building your level!)
+11 - log
+12 - boulder
+
+The second number is the starting position at which your item is rendered. Larger numbers cause the number to begin rendering
+further to the right of the screen. While the screen border is at about ~1600, you are more than welcome to exceed this.
+Experimentation is welcome!
+
+The third number is the object's starting height. Higher numbers will make the object render lower on the page, and numbers below
+1200 will effectively never be able to be accessed. Likewise, numbers less than 0 will never be able to be reached.
+Use discretion when determining the height of your object!
+
+The final number is the size of the object. All objects will render as a square, even if their sprite does not suggest this.
+Larger items will, of course, take up more of the screen.
+
+Once you have your level file created, head over to the main.c file. Look for the function SetTargetFPS. It is on line 45
+at time of writing. Place your function after this statement, like so:
+
+EnvItem * <name_of_level> = CreateLevel(<filename>);
+
+Next, you'll notice a chain of Transitions and PlayGame function calls starting on line 56. I've added a few empty spaces
+after the end of the last level code. Here, you can add your own transition calls and level delcarations.
+These are created with the format:
+
+Transition(<desired level number>);
+if(PlayGame(<name_of_level>, LENGTH(<name_of_level))) break;
+
+And that's it! Your level is now sequentially played after all other levels are completed.
+If you're interested in changing the level order, you absolutely can as well.
+Thank you for playing!
