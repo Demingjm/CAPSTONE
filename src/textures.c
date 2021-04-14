@@ -55,22 +55,17 @@ void DrawBackground(Texture2D *textures, Entity player, Camera2D camera) {
     DrawTextureEx(textures[0], (Vector2){0, 0}, 0.0f, 6.0f, WHITE);
 
     // Draw the farthest mountain
-    DrawTextureEx(textures[1], (Vector2){scrollingBack * -player.hitBox.x, 125}, 0.0f, 4.0f, WHITE);
-    DrawTextureEx(textures[1], (Vector2){textures[1].width * 2 + scrollingBack * -player.hitBox.x + 20, 125}, 0.0f, 4.0f, WHITE);
+    DrawTextureEx(textures[1], (Vector2){scrollingBack * -player.hitBox.x, 105}, 0.0f, 4.0f, WHITE);
+    DrawTextureEx(textures[1], (Vector2){textures[1].width * 2 + scrollingBack * -player.hitBox.x + 20, 105}, 0.0f, 4.0f, WHITE);
 
     // Draw the closets mountains
-    DrawTextureEx(textures[2], (Vector2){scrollingMid * -player.hitBox.x, 125}, 0.0f, 4.0f, WHITE);
-    DrawTextureEx(textures[2], (Vector2){textures[2].width * 2 + scrollingMid * -player.hitBox.x, 125}, 0.0f, 4.0f, WHITE);
+    DrawTextureEx(textures[2], (Vector2){scrollingMid * -player.hitBox.x, 105}, 0.0f, 4.0f, WHITE);
+    DrawTextureEx(textures[2], (Vector2){textures[2].width * 2 + scrollingMid * -player.hitBox.x, 105}, 0.0f, 4.0f, WHITE);
 
 
     // Draw the farthest trees
     DrawTextureEx(textures[3], (Vector2){scrollingFront * -player.hitBox.x, -50}, 0.0f, 5.0f, WHITE);
     DrawTextureEx(textures[3], (Vector2){textures[3].width * 2 + scrollingFront * -player.hitBox.x, -50}, 0.0f, 5.0f, WHITE);
-
-    // Draw the foreground trees, these move with the map itself so they don't change at a separate rate
-    DrawTextureEx(textures[4], (Vector2){0, -SCREEN_HEIGHT/4}, 0.0f, 6.0f, WHITE);
-    DrawTextureEx(textures[4], (Vector2){textures[4].width * 4 , -SCREEN_HEIGHT/2}, 0.0f, 6.0f, WHITE);
-    DrawTextureEx(textures[4], (Vector2){textures[4].width * 8 , -SCREEN_HEIGHT/2}, 0.0f, 6.0f, WHITE);
 
 }
 
@@ -153,15 +148,18 @@ void DrawMap(Texture2D *textures, EnvItem *map, int mapLength) {
     Vector2 origin;
 
     // Draw the closest trees
-    DrawTextureEx(textures[8], (Vector2){0, -50}, 0.0f, 6.0f, WHITE);
-    DrawTextureEx(textures[8], (Vector2){textures[8].width * 2, -50}, 0.0f, 6.0f, WHITE);
-    DrawTextureEx(textures[8], (Vector2){textures[8].width * 4, -50}, 0.0f, 6.0f, WHITE);
+    DrawTextureEx(textures[8], (Vector2){0, -75}, 0.0f, 6.0f, WHITE);
+    DrawTextureEx(textures[8], (Vector2){textures[8].width * 2, -75}, 0.0f, 6.0f, WHITE);
+    DrawTextureEx(textures[8], (Vector2){textures[8].width * 4, -75}, 0.0f, 6.0f, WHITE);
 
     //DrawTextureEx(textures[1], (Vector2){1350,SCREEN_HEIGHT-textures[1].height*5}, 0.0f,5.0f,WHITE);
     for (int i = 0; i < mapLength; i ++) {
         switch (map[i].id) {
             case 0:
-                DrawTextureEx(textures[0], (Vector2){map[i].hitBox.x, map[i].hitBox.y}, 0.0f, 1.5f, WHITE);
+                src    = (Rectangle) {0,0, textures[0].width, textures[0].height};
+                dst    = map[i].hitBox;
+                origin = (Vector2) {0,0};
+                DrawTexturePro(textures[0], src, dst, origin, 0.0f, WHITE);
                 break;
             case 3:
                 src = (Rectangle) {0,0,textures[7].width, textures[7].height};
