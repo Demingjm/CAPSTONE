@@ -43,6 +43,11 @@ int main() {
     SetWindowIcon(icon);
 
     SetTargetFPS(60);
+    //Level creation code goes here. Beware filepaths!
+    int level4Length = 0;
+    EnvItem *level4 = CreateLevel("level4.txt", &level4Length);
+    level4Length--;
+    
 
     // Main game loop
     // Loop runs as long as the window
@@ -60,14 +65,16 @@ int main() {
         if (PlayGame(level2, LENGTH(level2))) break;
         Transition(3);
         if (PlayGame(level3, LENGTH(level3))) break;
+        Transition(4);
+        if (PlayGame(level4, level4Length)) break;
 
 
-        
+
         FadeIn();
         if (newCreditScreen())   break;
         FadeIn();
     }
-
+    free(level4);
     CloseWindow(); // tell opengl to close the window
 
     return 0;
