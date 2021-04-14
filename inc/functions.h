@@ -8,7 +8,7 @@
 ----------------------------------------------------------------------
 By: Joseph Deming & Hunter Craig
 
-Version: alpha-1.1.6
+Version: alpha-2.1.0
 
 
 ***********************************************************************/
@@ -194,7 +194,7 @@ bool newCreditScreen();
 /**
  * Parser.c
  */
-EnvItem* CreateLevel(char * filename, int * length);
+EnvItem* CreateLevel(char * filename, int *levelLength);
 
 /**
  * Environtment Items IDs:
