@@ -66,6 +66,9 @@ int main() {
         Transition(3);
         if (PlayGame(level3, LENGTH(level3))) break;
         Transition(4);
+        if (CreateLevel("assets/levels/level4.txt", &level4Length) == NULL) {
+            break;
+        }
         if (PlayGame(level4, level4Length)) break;
 
 
