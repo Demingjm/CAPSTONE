@@ -8,7 +8,7 @@ Ever wanted to create your own level for the game, but don't know how to program
 The function in parser.c, conveniently labeled CreateLevel, takes a file name and converts the contents of that file
 into a playable level. In order to do this, the contents of the file must conform to the format listed below:
 
-0 0 1200 150
+0 0 900 150
 
 The first number is the numerical ID of the object you are attempting to create. Here is a helpful list
 of the internal IDs of every object in the game.
@@ -41,14 +41,15 @@ Larger items will, of course, take up more of the screen.
 Once you have your level file created, head over to the main.c file. Look for the function SetTargetFPS. It is on line 45
 at time of writing. Place your function after this statement, like so:
 
-EnvItem * <name_of_level> = CreateLevel(<filename>);
+int <nameoflevel>length = 0;
+EnvItem * <name_of_level> = CreateLevel(<filename>, &<nameoflevel>length);
 
 Next, you'll notice a chain of Transitions and PlayGame function calls starting on line 56. I've added a few empty spaces
 after the end of the last level code. Here, you can add your own transition calls and level delcarations.
 These are created with the format:
 
 Transition(<desired level number>);
-if(PlayGame(<name_of_level>, LENGTH(<name_of_level))) break;
+if(PlayGame(<name_of_level>, <nameoflevel>length)) break;
 
 And that's it! Your level is now sequentially played after all other levels are completed.
 If you're interested in changing the level order, you absolutely can as well.

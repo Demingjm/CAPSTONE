@@ -45,8 +45,8 @@ int main() {
     SetTargetFPS(60);
     //Level creation code goes here. Beware filepaths!
     int level4Length = 0;
-    EnvItem *level4 = CreateLevel("level4.txt", &level4Length);
-    level4Length--;
+    EnvItem *level4 = CreateLevel("assets/levels/level4.txt", &level4Length);
+    // level4Length--;
     
 
     // Main game loop
@@ -66,10 +66,7 @@ int main() {
         Transition(3);
         if (PlayGame(level3, LENGTH(level3))) break;
         Transition(4);
-        if (CreateLevel("assets/levels/level4.txt", &level4Length) == NULL) {
-            break;
-        }
-        if (PlayGame(level4, level4Length)) break;
+        if ((level4 == NULL) || PlayGame(level4, level4Length)) break;
 
 
 

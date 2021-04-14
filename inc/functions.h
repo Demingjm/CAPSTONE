@@ -194,7 +194,7 @@ bool newCreditScreen();
 /**
  * Parser.c
  */
-EnvItem* CreateLevel(char * filename);
+EnvItem* CreateLevel(char * filename, int * length);
 
 /**
  * Environtment Items IDs:

@@ -30,21 +30,20 @@ EnvItem * CreateLevel(char * filename, int *levelLength) {
             numLines++;
         }
     }
-    fclose(file);
+    rewind(file);
     *levelLength = numLines;
-    FILE * write = fopen(filename, "r");
 
     EnvObject list[numLines];
-    EnvItem *builtMap = malloc(sizeof(EnvItem) * numLines);
+    EnvItem *builtMap = (EnvItem*) malloc(sizeof(EnvItem) * numLines);
     for (int i = 0; i < numLines; i++) {
         list[i] = (struct EnvObject) {0}; //Delcaring empty structs for each
         builtMap[i] = (struct EnvItem) {0};
     }
     for (int i = 0; i < numLines; i++) {
-        fscanf(write, "%d", &list[i].type);
-        fscanf(write, "%d", &list[i].startPoint);
-        fscanf(write, "%d", &list[i].height);
-        fscanf(write, "%d", &list[i].size);
+        fscanf(file, "%d", &list[i].type);
+        fscanf(file, "%d", &list[i].startPoint);
+        fscanf(file, "%d", &list[i].height);
+        fscanf(file, "%d", &list[i].size);
     }
     for (int i = 0; i < numLines; i++) {
         switch(list[i].type) {
@@ -139,7 +138,7 @@ EnvItem * CreateLevel(char * filename, int *levelLength) {
                 break;
         }
     }
-    fclose(write);
+    fclose(file);
 
     return builtMap;
 }
