@@ -34,7 +34,7 @@ float speedMult = 1.0f;
  * @return none - returns nothing
  */
 
-void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, bool *game_state) {
+void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, bool *game_state, Sound *gameSounds) {
     float horizontal = IsKeyDown(KEY_D) - IsKeyDown(KEY_A); // used to determine the direction the player is moving, if both keys are pressed then horizontal = 0 and the player won't move
     int initJumpVelocity = sqrtf(2 * GRAVITY * player->jumpHeight); // the initial y-velocity used when a player jumps
 
@@ -66,7 +66,11 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
         }
     }
 
-    if (player->canJump && (IsKeyDown(KEY_W))) { player->velocity.y = -initJumpVelocity; player->canJump = false; } // player is trying to jump, change their velocity.
+    if (player->canJump && (IsKeyDown(KEY_W))) { 
+        PlaySound(gameSounds[3]);
+        player->velocity.y = -initJumpVelocity; 
+        player->canJump = false; 
+    } // player is trying to jump, change their velocity and play jump sound
 
     player->hitBox.x += player->velocity.x;
     player->hitBox.y += player->velocity.y;
@@ -83,6 +87,7 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
                         // fire obstacle
                         if (!player->invincible){
                             player->hearts--;
+                            PlaySound(gameSounds[2]);
                             player->invincible = true;
                             player->hurtTime = GetTime(); // store when the player was hurt
                             heartsLost++;
@@ -91,11 +96,13 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
                         break;
                     case 5:
                         player->jumpHeight = DFLT_JMP_HT;
+                        PlaySound(gameSounds[4]);
                         speedMult = 2; //double the players speed
 
                         break;
                     case 6:
                         speedMult = 1;
+                        PlaySound(gameSounds[4]);
                         player->jumpHeight = MAX_JMP_HT;
 
                         break;
@@ -104,6 +111,7 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
                         break;
                     case 8:
                         player->coins++;
+                        PlaySound(gameSounds[0]);
                         totalCoins++;
                         break;
                     case 10:
@@ -135,8 +143,13 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
 
     if (player->hitBox.y < 150) { player->hitBox.y = 150; player->velocity.y = 0; }
 
-    //Check if player has fallen through pit/world, reset game
-    if (player->hitBox.y > 1300 || player->hearts <= 0) { ResetGame(player, map, mapLength); };
+    //Check if player has fallen through pit/world, reset game and play death sound
+    if (player->hitBox.y > 1300 || player->hearts <= 0) { 
+        PlaySound(gameSounds[1]);
+        ResetGame(player, map, mapLength); 
+    };
+
+    
 }
 
 /**

@@ -42,6 +42,8 @@ bool StartGame() {
     SetMusicVolume(startMusic, 0.2f);
     PlayMusicStream(startMusic);
 
+    Sound buttonPress = LoadSound("assets/sounds/button_click.wav");
+
     ScrollState sc_state  = {0};
     Rectangle titlehitBox = (Rectangle){SCREEN_WIDTH/4,SCREEN_HEIGHT/2 - title.height,title.width, title.height};
 
@@ -65,7 +67,14 @@ bool StartGame() {
     /* Start Menu Loop */
     while (!start_state) { // while the game isn't supposed to start
         start_state = ButtonHandler(&start_button);
-        if (ButtonHandler(&quit_button) || WindowShouldClose()) { escaped = true; break; }
+        if (start_state) {
+            PlaySound(buttonPress);
+        }
+        if (ButtonHandler(&quit_button) || WindowShouldClose()) { 
+            PlaySound(buttonPress);
+            escaped = true; 
+            break; 
+        }
 
         BeginDrawing();
         {
@@ -84,6 +93,7 @@ bool StartGame() {
     UnloadTexture(start_button.texture);
     UnloadTexture(quit_button.texture);
     UnloadTexture(title);
+    UnloadSound(buttonPress);
     UnloadMusicStream(startMusic);
     return escaped;
 }

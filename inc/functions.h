@@ -136,7 +136,7 @@ extern EnvItem level3[27];
 /**
  * Functions.c
  */
-void UpdatePlayer(Entity *player, EnvItem *envItems, int envItemsLength, float deltaTime, bool *game_state);
+void UpdatePlayer(Entity *player, EnvItem *envItems, int envItemsLength, float deltaTime, bool *game_state, Sound *gameSounds);
 void UpdateCameraCenter(Camera2D *camera, Entity *player, EnvItem *map, int mapLength, int width, int height);
 void CreatePlayer(Entity *player, Texture2D texture);
 void CreateCamera(Camera2D *camera, Entity *player, int width, int height);

@@ -64,6 +64,14 @@ int PlayGame(EnvItem *map, int mapLength) {
         LoadTexture("assets/map/speed-boost.png")
     };
 
+    Sound gameSounds [] = {
+        LoadSound("assets/sounds/coin_pick_up.wav"),
+        LoadSound("assets/sounds/death.wav"),
+        LoadSound("assets/sounds/player_hurt.wav"),
+        LoadSound("assets/sounds/player_jump.wav"),
+        LoadSound("assets/sounds/power_up.wav")
+    };
+
     Music gameMusic = LoadMusicStream("assets/sounds/game_music.mp3");
     SetMusicVolume(gameMusic, 0.2f);
     PlayMusicStream(gameMusic);
@@ -82,6 +90,7 @@ int PlayGame(EnvItem *map, int mapLength) {
     int bg_length           = LENGTH(bg_textures);
     int map_textures_length = LENGTH(map_textures);
     int hud_length          = LENGTH(hud_textures);
+    int sound_length        = LENGTH(gameSounds);
 
     float deltaTime = 0;
     bool escaped    = false;
@@ -111,7 +120,7 @@ int PlayGame(EnvItem *map, int mapLength) {
             BeginMode2D(camera); {
 
                 DrawMap(map_textures, map, mapLength);
-                UpdatePlayer(&player, map, mapLength, deltaTime, &game_state);
+                UpdatePlayer(&player, map, mapLength, deltaTime, &game_state, gameSounds);
                 DrawPlayer(&player, deltaTime);
 
             } EndMode2D();
@@ -127,6 +136,9 @@ int PlayGame(EnvItem *map, int mapLength) {
         UnloadTextures(bg_textures, bg_length);
         UnloadTextures(map_textures, map_textures_length);
         UnloadTextures(hud_textures, hud_length);
+        for (int i = 0; i < sound_length; i++) {
+            UnloadSound(gameSounds[i]);
+        }   
         UnloadMusicStream(gameMusic);
 
         if (escaped) 
