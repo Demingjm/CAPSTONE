@@ -48,6 +48,8 @@ int main() {
     EnvItem *level4 = CreateLevel("assets/levels/level4.txt", &level4Length);
     // level4Length--;
     
+    //Sound loading code
+    InitAudioDevice();
 
     // Main game loop
     // Loop runs as long as the window
@@ -71,10 +73,11 @@ int main() {
 
 
         FadeIn();
-        if (newCreditScreen())   break;
+        if (newCreditScreen()) break;
         FadeIn();
     }
     free(level4);
+    CloseAudioDevice();
     CloseWindow(); // tell opengl to close the window
 
     return 0;

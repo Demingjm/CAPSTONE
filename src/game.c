@@ -64,6 +64,12 @@ int PlayGame(EnvItem *map, int mapLength) {
         LoadTexture("assets/map/speed-boost.png")
     };
 
+    Music gameMusic = LoadMusicStream("assets/sounds/game_music.mp3");
+    PlayMusicStream(gameMusic);
+    gameMusic.looping = true;
+
+    
+
     Texture2D playerSprite = LoadTexture("assets/player/player-sprite.png");
 
     Entity player = { 0 };
@@ -87,6 +93,8 @@ int PlayGame(EnvItem *map, int mapLength) {
         // update delta time, player, and camera
         deltaTime = GetFrameTime();
         UpdateCameraCenter(&camera, &player, map, mapLength, SCREEN_WIDTH, SCREEN_HEIGHT);
+        UpdateMusicStream(gameMusic);
+        
 
         // begin drawing the window
         BeginDrawing(); {
@@ -96,6 +104,7 @@ int PlayGame(EnvItem *map, int mapLength) {
 
             DrawBackground(bg_textures, player, camera); // draw this outside of the camera to prevent issues with how the image is drawn
             DrawHud(hud_textures, player, camera);
+            
 
             // used to initialize 2d mode with the camera 
             BeginMode2D(camera); {
@@ -117,6 +126,7 @@ int PlayGame(EnvItem *map, int mapLength) {
         UnloadTextures(bg_textures, bg_length);
         UnloadTextures(map_textures, map_textures_length);
         UnloadTextures(hud_textures, hud_length);
+        UnloadMusicStream(gameMusic);
 
         if (escaped) 
             return 1;

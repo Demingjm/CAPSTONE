@@ -26,7 +26,8 @@ bool Credits() {
     Texture2D title   = LoadTexture("assets/menu/The-Walk-Home-test.png");
     Texture2D bg      = LoadTexture("assets/background/credit_screen.png");
     Texture2D assets  = LoadTexture("assets/credits/Assets.png");
-    Texture2D programming = LoadTexture("assets/credits/programming.png"); 
+    Texture2D programming = LoadTexture("assets/credits/programming.png");
+    
 
     Rectangle titlehitBox = (Rectangle){0 + title.width / 3, 0  + title.height/2,title.width, title.height};
 
@@ -67,6 +68,8 @@ bool newCreditScreen() {
     Texture2D credits = LoadTexture("assets/credits/credits.png");
     Texture2D title   = LoadTexture("assets/menu/The-Walk-Home-test.png");
     Texture2D bg      = LoadTexture("assets/background/credit_screen.png");
+    Music creditsMusic = LoadMusicStream("assets/sounds/game_complete.mp3");
+    PlayMusicStream(creditsMusic);
 
     Rectangle titlehitBox = (Rectangle){0 + title.width / 3, 0  + title.height/2,title.width, title.height};
     Rectangle creditsHitBox = (Rectangle){SCREEN_WIDTH - (title.width / 2), SCREEN_HEIGHT, credits.width, credits.height};
@@ -92,6 +95,7 @@ bool newCreditScreen() {
 
         BeginDrawing();
             ClearBackground(WHITE);
+            UpdateMusicStream(creditsMusic);
 
             
             Rectangle src = (Rectangle) {0, 0, bg.width, bg.height};
@@ -127,6 +131,7 @@ bool newCreditScreen() {
 
     UnloadTexture(quit_button.texture);
     UnloadTexture(title);
+    UnloadMusicStream(creditsMusic);
 
     return escaped;
 }
