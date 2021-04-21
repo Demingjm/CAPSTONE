@@ -76,9 +76,11 @@ int main() {
         if (newCreditScreen()) break;
         FadeIn();
     }
+
     free(level4);
-    CloseAudioDevice();
     CloseWindow(); // tell opengl to close the window
+    sleep(1);
+    CloseAudioDevice();
 
     return 0;
 }
