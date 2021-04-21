@@ -23,6 +23,7 @@ Version: alpha-2.1.0
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #define SCREEN_WIDTH 1600
 #define SCREEN_HEIGHT 900
