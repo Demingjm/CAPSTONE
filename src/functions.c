@@ -118,7 +118,7 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
                         totalCoins++;
                         break;
                     case 10:
-                        ResetGame(player, map, mapLength);
+                        //ResetGame(player, map, mapLength);
                         *game_state = false;
                         
                         break;
