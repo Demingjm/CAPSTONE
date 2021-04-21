@@ -167,11 +167,20 @@ bool PredictCollision(Entity player, EnvItem target) {
  */
 bool ButtonHandler(Button *button) {
     bool state = false;
+    Sound click = LoadSound("assets/sounds/button_click.wav");
+
     if (CheckCollisionPointRec(GetMousePosition(), button->hitBox)) {
-        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) 
-        button->state = true;
-        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
-        state = true;
+        
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+            if (!button->state)
+                button->state = true;
+
+        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+            PlaySound(click);
+            state = true;
+            button->state = false;
+
+        }
     }
     return state;
 }
