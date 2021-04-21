@@ -67,13 +67,9 @@ bool StartGame() {
     /* Start Menu Loop */
     while (!start_state) { // while the game isn't supposed to start
         start_state = ButtonHandler(&start_button);
-        if (start_state) {
-            PlaySound(buttonPress);
-        }
         if (ButtonHandler(&quit_button) || WindowShouldClose()) { 
-            PlaySound(buttonPress);
             escaped = true; 
-            break; 
+            break;
         }
 
         BeginDrawing();
