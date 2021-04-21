@@ -70,7 +70,7 @@ int PlayGame(EnvItem *map, int mapLength) {
         LoadSound("assets/sounds/player_hurt.wav"),
         LoadSound("assets/sounds/player_jump.wav"),
         LoadSound("assets/sounds/power_up.wav"),
-        LoadSound("assets/sounds/health_pickup.mp3")
+        LoadSound("assets/sounds/health_pickup.wav")
     };
 
     Music gameMusic = LoadMusicStream("assets/sounds/game_music.mp3");
