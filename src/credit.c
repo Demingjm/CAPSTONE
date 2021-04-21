@@ -69,6 +69,7 @@ bool newCreditScreen() {
     Texture2D title   = LoadTexture("assets/menu/The-Walk-Home-test.png");
     Texture2D bg      = LoadTexture("assets/background/credit_screen.png");
     Music creditsMusic = LoadMusicStream("assets/sounds/game_complete.mp3");
+    SetMusicVolume(creditsMusic, 0.2f);
     PlayMusicStream(creditsMusic);
 
     Rectangle titlehitBox = (Rectangle){0 + title.width / 3, 0  + title.height/2,title.width, title.height};

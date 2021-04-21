@@ -65,6 +65,7 @@ int PlayGame(EnvItem *map, int mapLength) {
     };
 
     Music gameMusic = LoadMusicStream("assets/sounds/game_music.mp3");
+    SetMusicVolume(gameMusic, 0.2f);
     PlayMusicStream(gameMusic);
     gameMusic.looping = true;
 

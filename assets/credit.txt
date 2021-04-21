@@ -3,7 +3,7 @@ music:
 Game Complete Music : Space Coast - Topher Mohr & Alex Elena
 Game Over Music : Game Over - La musique de jeu video
 Game Music : Mountain Trials - Joshua McLean
-Game Start Music : (needs to be filled)
+Game Start Music : Trapped in the Upside Down - Jim Hall
 
 sound effects:
 

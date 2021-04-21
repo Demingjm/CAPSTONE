@@ -38,6 +38,10 @@ bool StartGame() {
         LoadTexture("assets/map/grass.png")
     };
 
+    Music startMusic = LoadMusicStream("assets/sounds/start_music.mp3");
+    SetMusicVolume(startMusic, 0.2f);
+    PlayMusicStream(startMusic);
+
     ScrollState sc_state  = {0};
     Rectangle titlehitBox = (Rectangle){SCREEN_WIDTH/4,SCREEN_HEIGHT/2 - title.height,title.width, title.height};
 
@@ -66,6 +70,7 @@ bool StartGame() {
         BeginDrawing();
         {
             ClearBackground(WHITE);
+            UpdateMusicStream(startMusic);
             DrawStartScreen(textures, texturesLength, &sc_state);
             DrawButton(&start_button);
             DrawButton(&quit_button);
@@ -79,5 +84,6 @@ bool StartGame() {
     UnloadTexture(start_button.texture);
     UnloadTexture(quit_button.texture);
     UnloadTexture(title);
+    UnloadMusicStream(startMusic);
     return escaped;
 }
