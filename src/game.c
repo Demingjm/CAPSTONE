@@ -69,7 +69,8 @@ int PlayGame(EnvItem *map, int mapLength) {
         LoadSound("assets/sounds/death.wav"),
         LoadSound("assets/sounds/player_hurt.wav"),
         LoadSound("assets/sounds/player_jump.wav"),
-        LoadSound("assets/sounds/power_up.wav")
+        LoadSound("assets/sounds/power_up.wav"),
+        LoadSound("assets/sounds/health_pickup.mp3")
     };
 
     Music gameMusic = LoadMusicStream("assets/sounds/game_music.mp3");

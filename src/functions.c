@@ -107,6 +107,9 @@ void UpdatePlayer(Entity *player, EnvItem *map, int mapLength, float deltaTime, 
 
                         break;
                     case 7:
+                        if (player->hearts <= 2) {
+                            PlaySound(gameSounds[5]);
+                        }
                         player->hearts += !(player->hearts % 3) ? 0 : 1;
                         break;
                     case 8:
