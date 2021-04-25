@@ -51,6 +51,7 @@ int main() {
     
     //Sound loading code
     InitAudioDevice();
+    SetMasterVolume(0.1f);
 
     // Main game loop
     // Loop runs as long as the window
