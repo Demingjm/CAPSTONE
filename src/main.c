@@ -46,7 +46,8 @@ int main() {
     //Level creation code goes here. Beware filepaths!
     int level4Length = 0;
     EnvItem *level4 = CreateLevel("assets/levels/level4.txt", &level4Length);
-    // level4Length--;
+    int level5Length = 0;
+    EnvItem *level5 = CreateLevel("assets/levels/level5.txt", &level5Length);
     
     //Sound loading code
     InitAudioDevice();
@@ -62,13 +63,16 @@ int main() {
         if (StartGame()) break;
         Transition(1);
         playTime = GetTime();
-        if (PlayGame(level1, LENGTH(level1)))  break;
+        if (PlayGame(level1, LENGTH(level1))) break;
         Transition(2);
         if (PlayGame(level2, LENGTH(level2))) break;
         Transition(3);
         if (PlayGame(level3, LENGTH(level3))) break;
         Transition(4);
         if ((level4 == NULL) || PlayGame(level4, level4Length)) break;
+        Transition(5);
+        if ((level5 == NULL) || PlayGame(level5, level5Length)) break;
+        
 
 
 
@@ -78,6 +82,7 @@ int main() {
     }
 
     free(level4);
+    free(level5);
     CloseWindow(); // tell opengl to close the window
     sleep(1);
     CloseAudioDevice();
